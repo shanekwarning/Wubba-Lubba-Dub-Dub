@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import CharacterContainter from './CharacterContainer/CharacterContainer'
 import './App.css';
+import { Route, NavLink } from 'react-router-dom'
+import CharacterPage from './CharacterPage/CharacterPage'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      characters: '',
+      locations: '',
+
+    }
+  }
+  componentDidMount() {
+    fetch('https://rickandmortyapi.com/api/character')
+      .then(data => data.json())
+      .then(data => this.setState({ characters: data }))
+  }
+  render() {
+    return (
+      <main className='main-RnM'>
+        <div className='style-title-box'>
+          <h1 className='title'>Wubba Lubba Dub Dub</h1>
+        </div>
+        <nav>
+          <NavLink to="/">
+            <button>Home</button>
+          </NavLink>
+        </nav>
+        <Route exact path='/' render={() => this.state.characters ? <CharacterContainter characters={this.state.characters} /> : ''} />
+        <Route exact path='/character/:id' render={({ match }) => {
+          return <CharacterPage characterPage={match.params.id} />
+        }} />
+      </main>
+    );
+  }
 }
+
 
 export default App;
