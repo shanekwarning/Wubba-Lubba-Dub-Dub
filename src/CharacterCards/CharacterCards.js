@@ -1,10 +1,9 @@
 import React from 'react'
 
-const CharacterCards = ({ image, name, fullDetails }) => {
+const CharacterCards = ({ image, name, id }) => {
 
     return (
         <section>
-            <p>Hello im a card</p>
             <img src={image} />
             <p>{name}</p>
         </section>
