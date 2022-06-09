@@ -1,0 +1,9 @@
+.circle img {
+    transition: 1s ease;
+
+}
+
+.circle img:hover {
+    border-radius: 50%;
+    transition: 1s ease;
+}

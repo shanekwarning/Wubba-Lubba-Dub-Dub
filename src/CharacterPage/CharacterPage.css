@@ -1,0 +1,12 @@
+.character-page-styling {
+    display: flex;
+    justify-content: space-evenly;
+
+
+}
+
+.episode-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
