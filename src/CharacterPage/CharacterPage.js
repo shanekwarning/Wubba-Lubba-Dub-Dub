@@ -23,14 +23,6 @@ class CharacterPage extends Component {
         let charactersEpisodes;
         let show;
 
-        // if (this.state.character === '') {
-        //     return charactersEpisodes = ''
-        // } else {
-        //     charactersEpisodes = this.state.character.episodes.map(episode => {
-        //         console.log(episode.split('/'))
-        //         return <p> {episode.split('/').slice(-1)} </p>
-        //     })
-        // }
         if (this.state.character === '') {
             return
         } else if (this.state.character !== '') {
@@ -50,7 +42,7 @@ class CharacterPage extends Component {
                         <div className='character-photo-container'>
                             <img className='character-photo' src={this.state.character.image} />
                         </div>
-                        <div>
+                        <div className='character-info'>
                             <p>Name: {this.state.character.name}</p>
                             <p>Gender: {this.state.character.gender}</p>
                             <p>Species: {this.state.character.species}</p>

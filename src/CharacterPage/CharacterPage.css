@@ -1,3 +1,10 @@
+.character-page-main {
+    height: 90%;
+    width: 80%;
+    background-color: rgb(195, 189, 174);
+    position: static;
+}
+
 .character-page-styling {
     display: flex;
     justify-content: space-evenly;
@@ -9,4 +16,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.character-info {
+    color: yellow;
+}
+
+.episode-container {
+    color: yellow
 }
