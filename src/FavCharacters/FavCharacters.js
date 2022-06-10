@@ -1,12 +1,12 @@
 import React from 'react'
 import CharacterCards from '../CharacterCards/CharacterCards'
-import './CharacterContainer.css'
+import './FavCharacters.css'
 import { NavLink } from 'react-router-dom'
 
 
-const CharacterContainer = ({ characters, fav }) => {
+const CharacterContainer = ({ favorites, remove }) => {
 
-    const characterCards = characters.results.map(character => {
+    const characterCards = favorites.map(character => {
         return <div key={character.id}>
             <NavLink to={`/character/${character.id}`}>
 
@@ -14,11 +14,11 @@ const CharacterContainer = ({ characters, fav }) => {
                     image={character.image}
                     name={character.name}
                     id={character.id}
-                    fav={fav}
+
                 />
             </NavLink>
             <p className='character-name'>{character.name}</p>
-            <button onClick={() => fav(character.id)}>Add to Favorites</button>
+            <button onClick={() => remove(character.id)}>Delete their existance</button>
         </div>
 
     })
