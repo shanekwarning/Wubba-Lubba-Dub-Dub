@@ -4,6 +4,7 @@ import './App.css';
 import { Route, NavLink } from 'react-router-dom'
 import CharacterPage from './CharacterPage/CharacterPage'
 import FavCharacters from './FavCharacters/FavCharacters'
+import Pagination from './Pagination/Pagination'
 
 class App extends Component {
   constructor() {
@@ -11,14 +12,17 @@ class App extends Component {
     this.state = {
       characters: '',
       favCharacters: [],
-      locations: '',
 
     }
   }
   componentDidMount() {
-    fetch('https://rickandmortyapi.com/api/character')
+    fetch('https://rickandmortyapi.com/api/character?page=1')
       .then(data => data.json())
       .then(data => this.setState({ characters: data }))
+  }
+
+  fetchCharacters = (number) => {
+    fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
   }
 
   addToFavorite = (id) => {
@@ -57,6 +61,7 @@ class App extends Component {
         <Route exact path='/character/:id' render={({ match }) => {
           return <CharacterPage characterPage={match.params.id} />
         }} />
+        <Pagination characters={this.state.characters} setCharacters={this.fetchCharacters} />
       </main>
     );
   }
