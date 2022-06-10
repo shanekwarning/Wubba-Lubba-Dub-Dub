@@ -6,7 +6,6 @@ const CharacterCards = ({ image, name, id }) => {
     return (
         <section className='circle'>
             <img className='character-image' src={image} />
-            {/* <p>{name}</p> */}
         </section>
     )
 }

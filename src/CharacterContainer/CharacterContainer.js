@@ -4,10 +4,10 @@ import './CharacterContainer.css'
 import { NavLink } from 'react-router-dom'
 
 
-const CharacterContainer = (characters) => {
-    console.log('is this what you are looking for', characters.characters.results[0])
+const CharacterContainer = ({ characters, fav }) => {
+    console.log('is this what you are looking for', characters.results[0])
 
-    const characterCards = characters.characters.results.map(character => {
+    const characterCards = characters.results.map(character => {
         return <div key={character.id}>
             <NavLink to={`/character/${character.id}`}>
 
@@ -15,9 +15,11 @@ const CharacterContainer = (characters) => {
                     image={character.image}
                     name={character.name}
                     id={character.id}
+                    fav={fav}
                 />
             </NavLink>
             <p className='character-name'>{character.name}</p>
+            <button onClick={() => fav(character.id)}>Add to Favorites</button>
         </div>
 
     })

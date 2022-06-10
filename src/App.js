@@ -9,6 +9,7 @@ class App extends Component {
     super();
     this.state = {
       characters: '',
+      favCharacters: '',
       locations: '',
 
     }
@@ -17,6 +18,13 @@ class App extends Component {
     fetch('https://rickandmortyapi.com/api/character')
       .then(data => data.json())
       .then(data => this.setState({ characters: data }))
+  }
+
+  addToFavorite = (id) => {
+    const data = this.state.characters.results.find(character => character.id === id);
+    this.setState({
+      favCharacters: [...this.state.favCharacters, data]
+    })
   }
   render() {
     return (
@@ -29,7 +37,7 @@ class App extends Component {
             <button>Home</button>
           </NavLink>
         </nav>
-        <Route exact path='/' render={() => this.state.characters ? <CharacterContainter characters={this.state.characters} /> : ''} />
+        <Route exact path='/' render={() => this.state.characters ? <CharacterContainter characters={this.state.characters} fav={this.addToFavorite} /> : ''} />
         <Route exact path='/character/:id' render={({ match }) => {
           return <CharacterPage characterPage={match.params.id} />
         }} />
