@@ -20,6 +20,13 @@ class Pagination extends Component {
             this.setState({ pageRange: allPages, maxPages: numOfPages })
         }
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.currentPage !== this.state.currentPage) {
+            console.log('at least this works')
+            this.props.setCharacters(this.state.currentPage)
+        }
+    }
     fetchCharacters = (number) => {
         fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
     }
@@ -52,6 +59,7 @@ class Pagination extends Component {
                     className={`prev ${this.state.currentPage === 1 ? 'disabled' : ''}`}>
                     prev
                 </button>
+
                 {this.showPagesOptions().map((item, index) => (
                     <button
                         key={index}

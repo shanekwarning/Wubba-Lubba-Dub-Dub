@@ -23,6 +23,9 @@ class App extends Component {
 
   fetchCharacters = (number) => {
     fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
+      .then(data => data.json())
+      .then(data => this.setState({ characters: data }))
+
   }
 
   addToFavorite = (id) => {
