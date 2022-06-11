@@ -5,7 +5,6 @@ class Pagination extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: 1,
             pageRange: [],
             maxPages: 0
         }
@@ -22,37 +21,15 @@ class Pagination extends Component {
         }
     }
 
-    componentDidUpdate(_, prevState) {
-        if (prevState.currentPage !== this.state.currentPage) {
-            console.log('at least this works')
-            this.props.setCharacters(this.state.currentPage)
-        }
-    }
     fetchCharacters = (number) => {
         fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
     }
-    // nextPage = () => {
-    //     this.setState(prevState => ({
-    //         currentPage: prevState.currentPage + 1
-    //     }))
-    // }
-
-    // previousPage = () => {
-    //     this.setState(prevState => ({
-    //         currentPage: prevState.currentPage - 1
-    //     }))
-    // }
 
     changePage = (event) => {
         const pageNumber = Number(event.target.textContent)
         this.setState({ currentPage: pageNumber })
     }
 
-    // getPgNumSiblings = () => {
-    //     const num = this.currentPage - 1;
-    //     return  const children = this.state.pageRange.slice(num, num + 2)
-
-    // }
     returnMaxPages = () => {
         this.props.setCharacters(42)
         this.setState({ currentPage: 42 })
