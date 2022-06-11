@@ -7,6 +7,7 @@ class Pagination extends Component {
         super(props);
         this.state = {
             pageRange: [],
+            currentPage: 0
         }
     }
 
@@ -24,10 +25,6 @@ class Pagination extends Component {
 
     }
 
-    changePage = (event) => {
-        const pageNumber = Number(event.target.textContent)
-        this.setState({ currentPage: pageNumber })
-    }
 
     getNumAfterCurrentPage = () => {
         let afterCurrentPage = this.state.pageRange.slice(this.props.currentPage, this.props.currentPage + 3)
@@ -45,7 +42,7 @@ class Pagination extends Component {
 
     render() {
         const before = this.getNumBeforeCurrentPage().map(num => {
-            return <button>{num}</button>
+            return <button onClick={(event) => this.props.changePage(event)}>{num}</button>
         })
         const after = this.getNumAfterCurrentPage().map(num => {
             return <button>{num}</button>
@@ -64,8 +61,6 @@ class Pagination extends Component {
                 <p>{this.props.currentPage}</p>
                 {after}
                 <p>...</p>
-                {/* <button onClick={() => this.getNumAfterCurrentPage()}>after</button>
-                <button onClick={() => this.getNumBeforeCurrentPage()}>before</button> */}
                 <button onClick={() => this.returnMaxPages()}>
                     42
                 </button>

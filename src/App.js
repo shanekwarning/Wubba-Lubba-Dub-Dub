@@ -66,6 +66,11 @@ class App extends Component {
       currentPage: prevState.currentPage - 1
     }))
   }
+
+  changePage = (event) => {
+    const pageNumber = Number(event.target.textContent)
+    this.setState({ currentPage: pageNumber })
+  }
   render() {
     return (
       <main className='main-RnM'>
@@ -85,7 +90,7 @@ class App extends Component {
         <Route exact path='/character/:id' render={({ match }) => {
           return <CharacterPage characterPage={match.params.id} />
         }} />
-        <Route exact path='/' render={() => <Pagination characters={this.state.characters} setCharacters={this.fetchCharacters} currentPage={this.state.currentPage} next={this.nextPage} prev={this.previousPage} />} />
+        <Route exact path='/' render={() => <Pagination characters={this.state.characters} setCharacters={this.fetchCharacters} currentPage={this.state.currentPage} next={this.nextPage} prev={this.previousPage} changePage={this.changePage} />} />
       </main>
     );
   }
