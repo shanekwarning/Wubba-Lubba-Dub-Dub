@@ -5,7 +5,10 @@
 
 nav {
   background-color: yellow;
+  width: 100%;
   margin-bottom: 2%;
+  display: flex;
+  justify-content: center;
 }
 
 .style-title-box {

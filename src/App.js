@@ -29,19 +29,22 @@ class App extends Component {
   }
 
   fetchCharacters = (number) => {
+    console.log(number)
     fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
       .then(data => data.json())
-      .then(data => this.setState(prevState => ({ characters: data, favCharacters: prevState.favCharacters, currentPage: prevState.currentPage })))
+      .then(data => this.setState(prevState => ({ characters: data, favCharacters: prevState.favCharacters, currentPage: number })))
 
   }
 
   addToFavorite = (id) => {
     const data = this.state.characters.results.find(character => character.id === id);
-    this.setState({
-      favCharacters: [...this.state.favCharacters, data]
-    })
+    let ids = this.state.favCharacters.map(character => character.id)
+    if (!ids.includes(id)) {
+      this.setState({
+        favCharacters: [...this.state.favCharacters, data]
+      })
+    }
   }
-
   removeFromFavorites = (id) => {
     const remove = this.state.favCharacters.filter(character => character.id !== id);
     this.setState({ favCharacters: remove })
@@ -66,6 +69,11 @@ class App extends Component {
       currentPage: prevState.currentPage - 1
     }))
   }
+
+  changePage = (event) => {
+    const pageNumber = Number(event.target.textContent)
+    this.setState({ currentPage: pageNumber })
+  }
   render() {
     return (
       <main className='main-RnM'>
@@ -80,12 +88,12 @@ class App extends Component {
             {this.state.favorites ? '' : <button onClick={() => this.takeMeToFav()}> Favorites</button>}
           </NavLink>
         </nav>
-        <Route exact path='/' render={() => this.state.characters ? <CharacterContainter characters={this.state.characters} fav={this.addToFavorite} /> : ''} />
+        <Route exact path='/' render={() => this.state.characters ? <CharacterContainter characters={this.state.characters} fav={this.addToFavorite} hideFav={this.takeMeToFav} /> : ''} />
         <Route exact path='/fav' render={() => <FavCharacters favorites={this.state.favCharacters} remove={this.removeFromFavorites} />} />
         <Route exact path='/character/:id' render={({ match }) => {
           return <CharacterPage characterPage={match.params.id} />
         }} />
-        <Route exact path='/' render={() => <Pagination characters={this.state.characters} setCharacters={this.fetchCharacters} currentPage={this.state.currentPage} next={this.nextPage} prev={this.previousPage} />} />
+        <Route exact path='/' render={() => <Pagination characters={this.state.characters} setCharacters={this.fetchCharacters} currentPage={this.state.currentPage} next={this.nextPage} prev={this.previousPage} changePage={this.changePage} />} />
       </main>
     );
   }

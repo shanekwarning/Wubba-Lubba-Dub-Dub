@@ -4,7 +4,7 @@ import './CharacterContainer.css'
 import { NavLink } from 'react-router-dom'
 
 
-const CharacterContainer = ({ characters, fav }) => {
+const CharacterContainer = ({ characters, fav, hideFav }) => {
 
     const characterCards = characters.results.map(character => {
         return <div key={character.id}>
@@ -15,6 +15,7 @@ const CharacterContainer = ({ characters, fav }) => {
                     name={character.name}
                     id={character.id}
                     fav={fav}
+                    hide={hideFav}
                 />
             </NavLink>
             <p className='character-name'>{character.name}</p>
