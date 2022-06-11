@@ -42,10 +42,10 @@ class Pagination extends Component {
 
     render() {
         const before = this.getNumBeforeCurrentPage().map(num => {
-            return <button onClick={(event) => this.props.changePage(event)}>{num}</button>
+            return <button className='pagination-button' onClick={(event) => this.props.changePage(event)}>{num}</button>
         })
         const after = this.getNumAfterCurrentPage().map(num => {
-            return <button>{num}</button>
+            return <button className='pagination-button' onClick={(event) => this.props.changePage(event)}>{num}</button>
         })
         return (
             <div className='pagination'>
@@ -53,16 +53,16 @@ class Pagination extends Component {
                     className={`prev ${this.state.currentPage === 1 ? 'disabled' : ''}`}>
                     prev
                 </button>
-                <button onClick={() => this.props.setCharacters(1)}>
-                    1
+                <button className='pagination-button' onClick={() => this.props.setCharacters(1)}>
+                    First
                 </button>
-                <p>...</p>
+                <p className='pagination-dots'>...</p>
                 {before}
-                <p>{this.props.currentPage}</p>
+                <p className='pagination-current-page'>{this.props.currentPage}</p>
                 {after}
-                <p>...</p>
-                <button onClick={() => this.returnMaxPages()}>
-                    42
+                <p className='pagination-dots' >...</p>
+                <button className='pagination-button' onClick={() => this.props.setCharacters(this.state.pageRange.length)}>
+                    Last
                 </button>
                 <button
                     onClick={() => this.props.next()}
