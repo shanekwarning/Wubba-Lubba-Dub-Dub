@@ -4,3 +4,8 @@
     box-shadow: none;
     color: #999;
 }
+
+.pagination {
+    display: flex;
+
+}

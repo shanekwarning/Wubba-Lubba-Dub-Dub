@@ -1,28 +1,27 @@
 import React, { Component } from 'react'
 import './Pagination.css'
+import { homePage } from '../Api'
 
 class Pagination extends Component {
     constructor(props) {
         super(props);
         this.state = {
             pageRange: [],
-            maxPages: 0
         }
     }
+
     componentDidMount() {
-        if (this.props.length) {
-            let numOfPages = this.props.characters.info.pages
-            let allPages = []
-            for (let i = 1; i <= numOfPages; i++) {
-                return allPages.push(i)
-            }
+        let pages = []
 
-            this.setState(prevState => ({ currentPage: prevState.currentPage, pageRange: allPages, maxPages: numOfPages }))
-        }
-    }
+        homePage.then(data => {
+            for (let i = 1; i <= data.info.pages; i++) {
+                pages.push(i)
+            };
+        })
+            .then(this.setState({ pageRange: pages }))
 
-    fetchCharacters = (number) => {
-        fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
+
+
     }
 
     changePage = (event) => {
@@ -30,18 +29,29 @@ class Pagination extends Component {
         this.setState({ currentPage: pageNumber })
     }
 
-    returnMaxPages = () => {
-        this.props.setCharacters(42)
-        this.setState({ currentPage: 42 })
+    getNumAfterCurrentPage = () => {
+        let afterCurrentPage = this.state.pageRange.slice(this.props.currentPage, this.props.currentPage + 3)
+        console.log(afterCurrentPage)
+        return afterCurrentPage
+    }
+
+    getNumBeforeCurrentPage = () => {
+        let beforeCurrentPage = this.state.pageRange.slice(this.props.currentPage - 3, this.props.currentPage - 1)
+        console.log(beforeCurrentPage)
+        return beforeCurrentPage
     }
 
 
 
-
     render() {
-
+        const before = this.getNumBeforeCurrentPage().map(num => {
+            return <button>{num}</button>
+        })
+        const after = this.getNumAfterCurrentPage().map(num => {
+            return <button>{num}</button>
+        })
         return (
-            <div>
+            <div className='pagination'>
                 <button onClick={() => this.props.prev()}
                     className={`prev ${this.state.currentPage === 1 ? 'disabled' : ''}`}>
                     prev
@@ -49,13 +59,19 @@ class Pagination extends Component {
                 <button onClick={() => this.props.setCharacters(1)}>
                     1
                 </button>
-
+                <p>...</p>
+                {before}
+                <p>{this.props.currentPage}</p>
+                {after}
+                <p>...</p>
+                {/* <button onClick={() => this.getNumAfterCurrentPage()}>after</button>
+                <button onClick={() => this.getNumBeforeCurrentPage()}>before</button> */}
                 <button onClick={() => this.returnMaxPages()}>
                     42
                 </button>
                 <button
                     onClick={() => this.props.next()}
-                    className={`next ${this.state.currentPage === this.state.maxPages ? 'disabled' : ''}`}
+                    className={`next ${this.props.currentPage === this.state.pageRange.length ? 'disabled' : ''}`}
                 >
                     next
                 </button>
