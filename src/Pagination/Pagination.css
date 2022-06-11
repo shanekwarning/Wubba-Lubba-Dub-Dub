@@ -21,6 +21,7 @@
     color: greenyellow;
     margin-left: 1vw;
     margin-right: 1vw;
+
 }
 
 .pagination-button {
@@ -29,15 +30,14 @@
     background-color: rgb(255, 16, 240);
 }
 
-button:hover,
-button:focus {
+button:hover {
     background: aqua;
 }
 
-button:focus {
+/* button:focus {
     outline: 1px solid #fff;
     outline-offset: -4px;
-}
+} */
 
 button:active {
     transform: scale(0.99);
