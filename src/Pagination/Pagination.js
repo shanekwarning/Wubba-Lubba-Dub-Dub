@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+import './Pagination.css'
 
 class Pagination extends Component {
     constructor(props) {
         super(props);
         this.state = {
             currentPage: 1,
-            pageLimit: 5,
             pageRange: [],
             maxPages: 0
         }
@@ -15,13 +15,14 @@ class Pagination extends Component {
             let numOfPages = this.props.characters.info.pages
             let allPages = []
             for (let i = 1; i <= numOfPages; i++) {
-                allPages.push(i)
+                return allPages.push(i)
             }
-            this.setState({ pageRange: allPages, maxPages: numOfPages })
+
+            this.setState(prevState => ({ currentPage: prevState.currentPage, pageRange: allPages, maxPages: numOfPages }))
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(_, prevState) {
         if (prevState.currentPage !== this.state.currentPage) {
             console.log('at least this works')
             this.props.setCharacters(this.state.currentPage)
@@ -30,47 +31,53 @@ class Pagination extends Component {
     fetchCharacters = (number) => {
         fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
     }
-    nextPage = () => {
-        this.setState(prevState => ({
-            currentPage: prevState.currentPage + 1
-        }))
-    }
+    // nextPage = () => {
+    //     this.setState(prevState => ({
+    //         currentPage: prevState.currentPage + 1
+    //     }))
+    // }
 
-    previousPage = () => {
-        this.setState(prevState => ({
-            currentPage: prevState.currentPage - 1
-        }))
-    }
+    // previousPage = () => {
+    //     this.setState(prevState => ({
+    //         currentPage: prevState.currentPage - 1
+    //     }))
+    // }
 
     changePage = (event) => {
-        const pageNumber = event.target.textContent
+        const pageNumber = Number(event.target.textContent)
         this.setState({ currentPage: pageNumber })
     }
 
-    showPagesOptions = () => {
-        let start = Math.floor((this.changePage - 1) / this.state.pageLimit) * this.state.pageLimit;
-        return new Array(this.state.pageLimit).fill().map((_, idx) => start + idx + 1)
+    // getPgNumSiblings = () => {
+    //     const num = this.currentPage - 1;
+    //     return  const children = this.state.pageRange.slice(num, num + 2)
+
+    // }
+    returnMaxPages = () => {
+        this.props.setCharacters(42)
+        this.setState({ currentPage: 42 })
     }
 
+
+
+
     render() {
+
         return (
             <div>
-                <button onClick={this.previousPage}
+                <button onClick={() => this.props.prev()}
                     className={`prev ${this.state.currentPage === 1 ? 'disabled' : ''}`}>
                     prev
                 </button>
+                <button onClick={() => this.props.setCharacters(1)}>
+                    1
+                </button>
 
-                {this.showPagesOptions().map((item, index) => (
-                    <button
-                        key={index}
-                        onClick={this.changePage}
-                        className={`pageOptions ${this.state.currentPage === item ? 'active' : null}`}
-                    >
-                        <span>{item}</span>
-                    </button>
-                ))}
+                <button onClick={() => this.returnMaxPages()}>
+                    42
+                </button>
                 <button
-                    onClick={this.nextPage}
+                    onClick={() => this.props.next()}
                     className={`next ${this.state.currentPage === this.state.maxPages ? 'disabled' : ''}`}
                 >
                     next
