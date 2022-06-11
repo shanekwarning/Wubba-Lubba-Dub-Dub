@@ -1,0 +1,14 @@
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.character-name {
+    color: aquamarine;
+}
+
+.no-favs {
+    color: yellow;
+}
