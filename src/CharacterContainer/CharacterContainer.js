@@ -18,8 +18,10 @@ const CharacterContainer = ({ characters, fav, hideFav }) => {
                     hide={hideFav}
                 />
             </NavLink>
-            <p className='character-name'>{character.name}</p>
-            <button onClick={() => fav(character.id)}>Add to Favorites</button>
+            <div className='name-fav-style-box'>
+                <p className='character-name'>{character.name}</p>
+                <button className='add-to-fav-button' onClick={() => fav(character.id)}>Add to Favorites</button>
+            </div>
         </div>
 
     })

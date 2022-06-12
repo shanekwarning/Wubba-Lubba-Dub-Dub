@@ -8,7 +8,7 @@ const CharacterContainer = ({ favorites, remove }) => {
     let characterCards;
     if (favorites.length) {
         characterCards = favorites.map(character => {
-            return <div key={character.id}>
+            return <div className='character-card' key={character.id}>
                 <NavLink to={`/character/${character.id}`}>
 
                     <CharacterCards
@@ -18,8 +18,10 @@ const CharacterContainer = ({ favorites, remove }) => {
 
                     />
                 </NavLink>
-                <p className='character-name'>{character.name}</p>
-                <button onClick={() => remove(character.id)}>Delete their existance</button>
+                <div className='name-fav-style-box '>
+                    <p className='character-name'>{character.name}</p>
+                    <button className='add-to-fav-button' onClick={() => remove(character.id)}>Delete their existance</button>
+                </div>
             </div>
 
         })

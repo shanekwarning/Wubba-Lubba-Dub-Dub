@@ -12,3 +12,18 @@
 .no-favs {
     color: yellow;
 }
+
+.character-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-container {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

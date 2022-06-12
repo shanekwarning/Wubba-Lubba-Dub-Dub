@@ -28,13 +28,11 @@ class Pagination extends Component {
 
     getNumAfterCurrentPage = () => {
         let afterCurrentPage = this.state.pageRange.slice(this.props.currentPage, this.props.currentPage + 3)
-        console.log(afterCurrentPage)
         return afterCurrentPage
     }
 
     getNumBeforeCurrentPage = () => {
         let beforeCurrentPage = this.state.pageRange.slice(this.props.currentPage - 3, this.props.currentPage - 1)
-        console.log(beforeCurrentPage)
         return beforeCurrentPage
     }
 

@@ -26,15 +26,12 @@ class CharacterPage extends Component {
         if (this.state.character === '') {
             return
         } else if (this.state.character !== '') {
-            console.log(this.state.character.episode[0])
             charactersEpisodes = this.state.character.episode.map(episode => {
                 show = episode.toString().split('/').splice(-1)
                 return <p className="episodes">Episode{show}</p>
             })
 
         }
-        console.log(show)
-        console.log(charactersEpisodes)
         return (
             <section className='character-page-main'>
                 {this.state.character ?
@@ -52,7 +49,11 @@ class CharacterPage extends Component {
                         </div>
                     </div> : ''}
 
-                {charactersEpisodes ? <div className='episode-container'>{charactersEpisodes} </div> : ''}
+                {charactersEpisodes ? <div className='episode-container'>
+                    <div className='featured-in-box'> <h3>Featured In</h3> </div>
+
+                    {charactersEpisodes}
+                </div> : ''}
             </section>
         )
     }

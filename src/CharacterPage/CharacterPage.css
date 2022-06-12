@@ -1,7 +1,7 @@
 .character-page-main {
     height: 90%;
     width: 80%;
-    background-color: rgb(195, 189, 174);
+    /* background-color: rgb(195, 189, 174); */
     position: static;
 }
 
@@ -24,4 +24,15 @@
 
 .episode-container {
     color: yellow
+}
+
+@media screen and (max-width: 40em) {
+    .character-photo {
+        height: 26vh;
+        width: 16vh;
+    }
+
+    .character-info {
+        margin-left: 2vw;
+    }
 }
