@@ -29,7 +29,6 @@ class App extends Component {
   }
 
   fetchCharacters = (number) => {
-    console.log(number)
     fetch(`https://rickandmortyapi.com/api/character?page=${number}`)
       .then(data => data.json())
       .then(data => this.setState(prevState => ({ characters: data, favCharacters: prevState.favCharacters, currentPage: number })))

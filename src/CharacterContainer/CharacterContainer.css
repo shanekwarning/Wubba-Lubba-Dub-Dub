@@ -8,3 +8,14 @@
 .character-name {
     color: aquamarine;
 }
+
+.name-fav-style-box {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.add-to-fav-button {
+    height: 3vh;
+    margin: 16px;
+}
